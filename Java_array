@@ -79,6 +79,38 @@ public class solution {
 
 
 
+/*Follow up for "Remove Duplicates":
+What if duplicates are allowed at most twice?
+For example,
+Given sorted array A =[1,1,1,2,2,3],
+Your function should return length =5, and A is now[1,1,2,2,3].
+*/
+public class solution {
+       
+       
+       public int removeDupicates(int[] A)
+       {
+             int count =1;
+             int j =1;
+             for (int i =1;i<A.length;i++)
+             {
+                    if(A[i-1]==A[i])
+                    {
+                          count++;
+                          if(count>=3)
+                                 continue;   
+                    }else
+                          count = 1;
+                    
+                    
+                    A[j++]=A[i];
+             }
+             
+             return j;     
+       }    
+}
+
+
 
 
 

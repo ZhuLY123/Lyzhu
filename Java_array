@@ -1,0 +1,84 @@
+/* this program is to merge two arrays(disorder)
+*  author:lingyu zhu
+*/
+
+public int[] mergeTwoArray(int[] A, int[] B) {
+    int[] C = new int[A.length + B.length];
+    int k = 0;
+    int i = 0;
+    int j = 0;
+    while(i < A.length && j < B.length) {
+        if (A[i] < B[j])
+            C[k++] = A[i++];
+        else
+            C[k++] = B[j++];
+    }
+    while (i < A.length)
+        C[k++] = A[i++];
+    while (j < B.length)
+        C[k++] = B[j++];
+    return C;
+}
+
+
+/* this program is to merge two sorted arrays
+*  author:lingyu zhu
+*  leetcode 
+*  Given two sorted integer arrays A and B, merge B into A as one sorted array.
+*  Note:
+*  You may assume that A has enough space (size that is greater or equal to m + n)
+*  to hold additional elements from B. The number of elements initialized in A and B are m and n respectively.
+*/
+
+public void merge(int A[], int m, int B[], int n) {
+        while(m > 0 && n > 0){
+            if(A[m-1] > B[n-1]){
+                A[m+n-1] = A[m-1];
+                m--;
+            }else{
+                A[m+n-1] = B[n-1];
+                n--;
+            }
+        }
+        while(n > 0){
+            A[m+n-1] = B[n-1];
+            n--;
+        }
+    }
+    
+    
+/*  Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+*   Do not allocate extra space for another array, you must do this in place with constant memory.
+*   For example,
+*   Given input array A =[1,1,2],
+*   Your function should return length =2, and A is now[1,2].*/
+/*
+
+
+public class solution {
+       public int removeduplicates(int [] A)
+       {
+             int count = 1;
+             for(int i =1;i<A.length;i++)
+             {
+                    if(A[i]==A[i-1])
+                    {
+                          continue;
+                    }else
+                    {
+                          A[count] = A[i];
+                          count++;
+                          
+                    }
+             }
+             
+             return count;
+                    
+       }
+}
+
+
+
+
+
+

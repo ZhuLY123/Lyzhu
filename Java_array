@@ -76,6 +76,7 @@ public class solution {
                     
        }
 }
+//trick： the count only count the unequal to previous number
 
 
 

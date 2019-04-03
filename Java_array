@@ -19,6 +19,7 @@ public int[] mergeTwoArray(int[] A, int[] B) {
         C[k++] = B[j++];
     return C;
 }
+//this program does not hava any sense, because merging two arrays just need two while. 
 
 
 /* this program is to merge two sorted arrays

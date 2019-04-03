@@ -59,7 +59,7 @@ public void merge(int A[], int m, int B[], int n) {
 public class solution {
        public int removeduplicates(int [] A)
        {
-             int count = 1;
+             int index = 1;
              for(int i =1;i<A.length;i++)
              {
                     if(A[i]==A[i-1])
@@ -67,8 +67,8 @@ public class solution {
                           continue;
                     }else
                     {
-                          A[count] = A[i];
-                          count++;
+                          A[index] = A[i];
+                          index++;
                           
                     }
              }

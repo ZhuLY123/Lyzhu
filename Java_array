@@ -296,5 +296,56 @@ public class bsolution {
 
 
 
+In a array A of size 2N, there are N+1 unique elements, and exactly one of these elements is repeated N times.
+Return the element repeated N times.
+
+Example 1:
+Input: [1,2,3,3]
+Output: 3
+Example 2:
+Input: [2,1,2,5,3,2]
+Output: 2
+Example 3:
+Input: [5,1,5,2,5,3,5,4]
+Output: 5
+
+class Solution {
+    public int repeatedNTimes(int[] A) {
+        Arrays.sort(A);
+        int n =0;
+        for(int i =1;i<A.length;i++)
+        {
+            if(A[i-1]!=A[i])
+                continue;
+            else
+            {
+                n=A[i];
+            }
+        }
+        return n;
+    }
+}
+
+
+class betterSolution {
+    public int repeatedNTimes(int[] A) {
+        Set<Integer> set = new HashSet<Integer>();
+        for(int i =0;i<A.length;i++)
+        {
+            if(set.contains(A[i]))
+                return A[i];
+            else
+                set.add(A[i]);     
+        }
+        return 0;
+    }
+}//trick: if the program cannot find the right answer, then return 0;
+
+
+
+
+
+
+
 
 

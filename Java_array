@@ -218,7 +218,7 @@ public class solution {
 
 
 
-
+Time complexity: O(n)
 import java.util.HashSet;
 import java.util.Set;
 
@@ -254,11 +254,46 @@ public class solution {
 		
 		return res;
 	}
-
-	
-	
 	
 }
+
+
+
+Time complexity: O(nlogn)
+import java.util.*;
+public class bsolution {
+	public int[] intersection(int [] num1, int [] num2) 
+	{
+		Arrays.sort(num1);
+		Arrays.sort(num2);
+		Set<Integer> set = new HashSet<Integer>();
+		int i =0, j = 0;
+		while(i<num1.length&&j<num2.length) 
+		{
+			if(num1[i]<num2[j])
+				i++;
+			else if(num1[i]>num2[j])
+				j++;
+			else 
+			{
+				set.add(num1[i]);
+				i++;
+				j++;
+			}		
+		}//while
+		
+		
+		int[] res = new int[set.size()];
+		int k =0;
+		for(Integer num: set) 
+		{
+			res[k++] = num;
+		}
+		return res;
+	}
+
+}
+
 
 
 

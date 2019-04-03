@@ -216,3 +216,50 @@ public class solution {
 
 
 
+
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+//Given two arrays, write a function to compute their intersection.
+/*Example 1:
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+Example 2:
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [9,4]*/
+
+
+public class solution {
+	
+	public int[] intersection(int num1[], int num2[]) 
+	{
+		Set<Integer> set = new HashSet<Integer>();
+		Set<Integer> interset = new HashSet<Integer>();
+		
+		for (int i =0; i<num1.length; i++) 
+			set.add(num1[i]);
+		
+		for(int i =0; i< num2.length; i++)
+			if(set.contains(num2[i])) 
+				interset.add(num2[i]);
+		
+		int[] res = new int [interset.size()];
+		int i =0;
+		for(Integer num: interset )
+			res[i++] = num;
+		
+		
+		
+		return res;
+	}
+
+	
+	
+	
+}
+
+
+
+

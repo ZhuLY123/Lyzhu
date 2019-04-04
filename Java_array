@@ -426,6 +426,37 @@ class Solution {
 
 
 
+public class csolution {
+	public void rotate(int [] nums, int k) 
+	{
+		int len = nums.length, l =0 ,r=len-1;
+		k= k%len;
+		if(len ==0) return;
+		
+		int mid= len-k;
+		reverse(nums, l, r);
+		reverse(nums, l, mid-1);
+		reverse(nums, mid, r);		
+		
+	}
+	
+	private void reverse(int [] nums, int l , int r) 
+	{
+		while(l<r) 
+		{
+			int temp = nums[l];
+			nums[l++] = nums[r];
+			nums[r--] =temp;
+			
+		}
+		
+	}
+
+}
+
+
+
+
 
 
 

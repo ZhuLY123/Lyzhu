@@ -73,11 +73,12 @@ public class solution {
                     }
              }
              
-             return count;
+             return index;
                     
        }
 }
 //trick： the count only count the unequal to previous number
+//trick: i is just for scanning, but index will stay still unless the next element is not equal to previous element.
 
 
 

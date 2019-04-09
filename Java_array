@@ -112,7 +112,7 @@ public class solution {
              return j;     
        }    
 }
-
+//trick : continue, to break this loop and enter into next loop
 
 
 

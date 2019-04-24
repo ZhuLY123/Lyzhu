@@ -1,1 +1,289 @@
+Tree is an important data structure, especially binary tree. Binary tree is a special kind of tree. 
+Each node in the binary tree has at most two sub-nodes, which are generally called left and right sub-nodes 
+(or left and right children). The sub-tree of the binary tree has left and right sub-trees, 
+and the order of the sub-trees can not be arbitrarily reversed. Binary tree is defined recursively. 
+Therefore, problems related to binary tree can be basically solved by recursive thinking. 
+Of course, some non-recursive solutions should also be mastered, such as non-recursive traversal nodes and so on.            
+-------------------------------            
+Author: Lingyu Zhu
 
+
+
+private static class TreeNode
+	{
+		int val;
+		TreeNode left;
+		TreeNode right;
+		public TreeNode() 
+		{
+			this.val = val;
+		}
+	}
+  
+ 
+ 
+ 
+ //Recursive Solution to the Number of Nodes of Binary Trees 
+	
+	public static int getNodeNumRec(TreeNode root) 
+	{
+		if(root == null)
+			return 0;
+		else 
+		{
+			return getNodeNumRec(root.left)+ getNodeNumRec(root.right)+1;
+		}
+	}
+  //need more space 
+  
+  //iteration
+  public static int getNodeNum(TreeNode root) 
+	{
+		
+		if(root == null)
+			return 0;
+		int count =1;
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) 
+		{
+			TreeNode cur = queue.remove();//移除并返回队列头部的元素 
+			if(cur.left!=null) 
+			{
+				queue.add(cur.left);
+				count++;
+			}
+			if(cur.right != null) 
+			{
+				queue.add(cur.right);
+				count++;
+			}
+			
+		}
+		return count;
+	}
+  
+  
+  
+  //recursive: To find the depth (height) of a binary tree
+	public static int getDepthRec(TreeNode root) 
+	{
+		if(root == null)
+			return 0;
+		int leftDepth = getDepthRec(root.left);
+		int rightDepth = getDepthRec(root.right);
+		return Math.max(leftDepth, rightDepth)+1;
+	}
+  
+  //iteration
+  public static int getDepth(TreeNode root) 
+	{
+		
+		if(root == null)
+			return 0;
+		
+		int depth = 0;//深度
+		int currentLevelNodes = 1;
+		int nextLevelNodes = 0;
+		
+		
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) 
+		{
+			TreeNode cur = queue.remove();
+			currentLevelNodes--;
+			if(cur.left!=null) 
+			{
+				queue.add(cur.left);
+				nextLevelNodes++;
+			}
+			if(cur.right != null) 
+			{
+				queue.add(cur.right);
+				nextLevelNodes++;
+			}
+			if(currentLevelNodes == 0) 
+			{
+				depth++;
+				currentLevelNodes = nextLevelNodes;
+				nextLevelNodes =0;
+			}	
+		}
+		return depth;
+			
+	}
+  
+  
+  
+  //itreation : preorder traversal
+  public static void preorderTraversal(TreeNode root) 
+	{
+		if(root == null)
+			return;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		
+		stack.push(root);
+
+		while(!stack.isEmpty()) 
+		{
+			TreeNode cur = stack.pop();
+			System.out.println(cur.val+ " ");
+			
+			//Key Points: First press the right child,
+			//then press the left child, so that when out of the stack,
+			//first print the left child and then 
+			//print the right child. 
+			
+			if(cur.right!=null)
+				stack.push(cur.right);
+			if(cur.left!=null)
+				stack.push(cur.left);
+		}
+		
+	}
+  
+  
+  //iteration: levelTraversal
+	public static void levelTraversal(TreeNode root) 
+	{
+		
+		if(root == null)
+			return;
+		
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.push(root);
+		
+		while(!queue.isEmpty()) 
+		{
+			TreeNode cur = queue.removeFirst();
+			
+			System.out.println(cur.val+" ");
+			
+			if(cur.left!=null)
+				queue.add(cur.left);
+			if(cur.right!=null)
+				queue.add(cur.right);
+			
+		}
+		
+		
+	}
+  
+  
+  
+  
+  
+  
+  //iteration: inorder traversal
+	public static void inorderTraversal(TreeNode root) 
+	{
+		if(root ==null)
+			return;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode cur = root;
+		
+		while(true) 
+		{
+			while(cur != null) 
+			{
+				stack.push(cur);
+				cur = cur.left;
+				
+			}
+			if(stack.isEmpty())
+				break;
+			
+			//
+			cur = stack.pop();
+			System.out.println(cur.val+"");
+			cur = cur.right;
+		}
+	
+	}
+  
+  
+  
+  //recursive: postorder traversal
+	public static void postorderTraversalRec(TreeNode root) 
+	{
+		if(root == null)
+			return;
+		postorderTraversalRec(root.left);
+		postorderTraversalRec(root.right);
+		System.out.println(root.val);
+		
+		
+	}
+  
+  
+  //iteration: postorder traversal
+	public static void postorderTraversal(TreeNode root) 
+	{
+		if(root == null)
+			return;
+		
+		Stack<TreeNode> s = new Stack<TreeNode>();
+		Stack<TreeNode> output = new Stack<TreeNode>();
+		
+		s.push(root);
+
+		while(!s.isEmpty()) 
+		{
+			TreeNode cur = s.pop();
+			output.push(cur);
+			
+			if(cur.left != null)
+				s.push(cur.left);
+			if(cur.right!=null)
+				s.push(cur.right);
+			
+		}
+		while(!output.isEmpty())
+			System.out.println(output.pop().val+ " ");
+		
+		
+	}
+	
+	
+  
+  
+  
+  //iteration: levelTraversal
+	public static void levelTraversal(TreeNode root) 
+	{
+		
+		if(root == null)
+			return;
+		
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.push(root);
+		
+		while(!queue.isEmpty()) 
+		{
+			TreeNode cur = queue.removeFirst();
+			System.out.println(cur.val+" ");
+			if(cur.left!=null)
+				queue.add(cur.left);
+			if(cur.right!=null)
+				queue.add(cur.right);
+			
+		}
+		
+		
+	}
+	
+	
+	
+  
+
+  
+  
+  
+  
+  
+  
+  
+  

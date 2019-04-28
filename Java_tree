@@ -276,6 +276,49 @@ private static class TreeNode
 	}
 	
 	
+//convert BST into DLL
+//recursive
+public static TreeNode convertBET2SLLSubRec(TreeNode root) 
+	{
+		if(root == null || (root.left == null && root.left == null))
+			return root;
+		
+		TreeNode tmp = null;
+		if(root.left!= null) 
+		{
+			tmp =convertBET2SLLSubRec(root.left);
+			while(tmp.right !=null) 
+			{
+				tmp = tmp.right;
+				
+			}
+			tmp.right = root;
+			root.left = tmp;
+			
+		}
+		if(root.right!= null) 
+		{
+			
+			tmp = convertBET2SLLSubRec(root.right);
+			while(tmp.left!=null) 
+			{
+				
+				tmp = tmp.left;
+				
+			}
+			tmp.left= root;
+			root.right = tmp;
+		}
+		
+		return root;
+	}
+	
+	
+	
+//iteration
+
+	
+	
 	
   
 

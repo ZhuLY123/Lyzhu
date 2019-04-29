@@ -320,6 +320,30 @@ public static TreeNode convertBET2SLLSubRec(TreeNode root)
 	
 	
 	
+	
+	//求二叉树第K层的节点个数，递归
+	public static int getNodeNumKthLevelRec(TreeNode root, int k) 
+	{
+	
+		if(root == null || k<1)
+			return 0;
+		
+		if(k == 1)
+			return 1;
+		
+		int numLeft = getNodeNumKthLevelRec(root.left, k-1);
+		int numRight = getNodeNumKthLevelRec(root.right, k -1);
+		
+		return numLeft+ numRight;
+	
+		
+		
+	}
+
+
+
+
+
   
 
   

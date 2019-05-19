@@ -1,0 +1,76 @@
+#18 layers resnet
+conv = Conv2D(filters = 64, kernel_size = (7, 7), 
+       strides=(1, 1), 
+       padding=" same ", 
+       kernel_initializer=" he_normal ", 
+       kernel_regularizer=l2(1e-4))(input)  
+#he_pnormal it draws samples from a truncated normal distribution centered on 0
+
+#adopt batch normalization (BN) right after each convolution 
+#and before activation 
+norm = BatchNormalization(axis = CHANNEL_AXIS)(conv)
+conv_out = Activation("relu")(norm)
+
+pooling_out = MaxPooling2D(pool_size(3,3),strides = (2,2),padding = "same")(conv_out)
+
+#Conv2_x  xi- BN-ReLU-weight-BN-Relu-weight xi+1
+conv2_1 = Conv2D(filters = 64, kernel_size = (3, 3), 
+       strides=(1, 1), 
+       padding=" same ", 
+       kernel_initializer=" he_normal ", 
+       kernel_regularizer=l2(1e-4))(pooling_out)  
+
+norm2_1 = BatchNormalization(axis = CHANNEL_AXIS)(conv2_1)
+conv_out2_1 = Activation("relu")(norm2_1)
+
+conv2_2 = Conv2D(filters = 64, kernel_size = (3, 3), 
+       strides=(1, 1), 
+       padding=" same ", 
+       kernel_initializer=" he_normal ", 
+       kernel_regularizer=l2(1e-4))(conv_out2_1)
+
+norm2_2 = BatchNormalization(axis = CHANNEL_AXIS)(conv2_2)
+conv_out2_2 = Activation("relu")(norm2_2)
+
+residual2_1 = Conv2D(filters = 64, kernel_size = (3, 3), 
+       strides=(1, 1), 
+       padding=" same ", 
+       kernel_initializer=" he_normal ", 
+       kernel_regularizer=l2(1e-4))(conv_out2_2)
+
+#xi- BN-ReLU-weight-BN-Relu-weight xi+1  shape may be different
+# 维度变化
+input_shape = K.int_shape(input)
+residual_shape = K.int_shape(residual2_1)
+stride_width = int(round(input_shape[ROW_AXIS]/residual_shape[ROW_AXIS]))
+stride_height = int(round(input_shape[COL_AXIS]/residual_shape[COL_AXIS]))
+shortcut = input
+equal_channels = input_shape[CHANNEL_AXIS == residual_shape[CHANNEL_AXIS]]
+if stride_width>1 or stride_height>1 or not equal_channels:
+    shortcur = Conv2D(filters = residual_shape[CHANNEL_AXIS], 
+                      kernel_size = (1, 1), 
+                      strides=(stride_width, stride_height), 
+                      padding=" valid ", 
+                      kernel_initializer=" he_normal ", 
+                      kernel_regularizer=l2(0.0001))(input) 
+
+
+bottlenect2_1 = add([shortcut,residual])
+
+
+#Conv3_x
+
+conv3_1 = Conv2D(filters = 128, kernel_size = (3, 3), 
+       strides=(2, 2), 
+       padding=" same ", 
+       kernel_initializer=" he_normal ", 
+       kernel_regularizer=l2(1e-4))(pooling_out)  
+
+
+
+
+#filters = 64
+for i, r in enumerate(repetitions):
+    block = _residual_block(blo)
+
+
